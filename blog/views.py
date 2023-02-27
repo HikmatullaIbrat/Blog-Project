@@ -5,9 +5,20 @@ from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView, RetrieveAPIView
+from django.http import HttpResponse
 from .models import BlogPost
+from rest_framework.decorators import api_view, permission_classes
 from .serializers import BlogPostSerializer
 
+@api_view()
+@permission_classes((permissions.AllowAny,))
+def blog_list(request):
+    return Response('successfull attempt')
+
+@api_view()
+@permission_classes((permissions.AllowAny,))
+def blog_id_view(request, id):
+    return Response(id)
 class BlogPostListView(ListAPIView):
     queryset = BlogPost.objects.order_by('-date_created')
     serializer_class = BlogPostSerializer
