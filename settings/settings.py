@@ -151,7 +151,11 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
         
-    )
+    ),
+    'COERCE_DECIMAL_TO_STRING':False
+}
+REST_FRAMEWORK = {
+
 }
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 SUMMERNOTE_THEME = 'bs4'
