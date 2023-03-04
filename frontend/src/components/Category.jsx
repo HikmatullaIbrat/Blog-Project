@@ -7,14 +7,10 @@ function Category  (props) {
 
     const params = useParams()
 
-    const capitalizeFirstletter = (word) =>{
-        if(word)
-            return word.charAt(0).toUpperCase() + word.slice(1);
-        return '';
-    };
-
+    
     useEffect(() =>{
         const category = params.id;
+
         setCurrentCategory(capitalizeFirstletter(category));
         const config = {
             headers:{
@@ -24,9 +20,10 @@ function Category  (props) {
 
         const fetchData = async () => {
             try{
-                const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/blog/category`,
-                {category},config);
+
+                const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/blog/category`,{ category },config);
                 setBlogs(res.data);
+                // console.log(res.request)
             }
             catch(err){
                 
@@ -35,6 +32,12 @@ function Category  (props) {
         fetchData();
 
     },  [params.id]);
+    const capitalizeFirstletter = (word) =>{
+        if(word)
+            return word.charAt(0).toUpperCase() + word.slice(1);
+        return '';
+    };
+   
     
     const getCategoryBlogs = () =>{
         let list = [];
@@ -74,22 +77,23 @@ function Category  (props) {
         return result;
     };
     return(
+        
         <div className="container mt-3">
         <h3 className="display-4">{currentCategory} Category</h3>
         <div className="nav-scroller py-1 mb-2">
             <nav className="nav d-flex justify-content-between">
-                <Link className="p-2 link-secondary" to="category/world">World</Link>
-                <Link className="p-2 link-secondary" to="category/environment">Environment</Link>
-                <Link className="p-2 link-secondary" to="category/technology">Technology</Link>
-                <Link className="p-2 link-secondary" to="category/design">Design</Link>
-                <Link className="p-2 link-secondary" to="category/culture">Culture</Link>
-                <Link className="p-2 link-secondary" to="category/business">Business</Link>
-                <Link className="p-2 link-secondary" to="category/politics">Politics</Link>
-                <Link className="p-2 link-secondary" to="category/opinion">Opinion</Link>
-                <Link className="p-2 link-secondary" to="category/science">Science</Link>
-                <Link className="p-2 link-secondary" to="category/health">Health</Link>
-                <Link className="p-2 link-secondary" to="category/style">Style</Link>
-                <Link className="p-2 link-secondary" to="category/travle">Travel</Link>
+                <Link className="p-2 link-secondary" to={`/category/world`}>World</Link>
+                <Link className="p-2 link-secondary" to={`/category/environment`}>Environment</Link>
+                <Link className="p-2 link-secondary" to={`/category/technology`}>Technology</Link>
+                <Link className="p-2 link-secondary" to={`/category/design`}>Design</Link>
+                <Link className="p-2 link-secondary" to={`/category/culture`}>Culture</Link>
+                <Link className="p-2 link-secondary" to={`/category/business`}>Business</Link>
+                <Link className="p-2 link-secondary" to={`/category/politics`}>Politics</Link>
+                <Link className="p-2 link-secondary" to={`/category/opinion`}>Opinion</Link>
+                <Link className="p-2 link-secondary" to={`/category/science`}>Science</Link>
+                <Link className="p-2 link-secondary" to={`/category/health`}>Health</Link>
+                <Link className="p-2 link-secondary" to={`/category/style`}>Style</Link>
+                <Link className="p-2 link-secondary" to={`/category/travel`}>Travel</Link>
             </nav>
         </div>
         {getCategoryBlogs()}
